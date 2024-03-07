@@ -1,11 +1,11 @@
 "use client";
 
 import { useRouter } from 'next/navigation'
-import { registerAction } from '@/lib/actions';
+import { registerAction } from '../../../lib/actions';
 // import { useFormState } from "react-dom";
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
-import { User } from '@/lib/models';
+import { User } from '../../../lib/models'
 
 const RegisterPage = () => {
 

@@ -1,8 +1,12 @@
+
+import { useSession,signOut } from 'next-auth/react'
+import { getServerSession } from 'next-auth'
+import { authOptions } from '../../app/api/auth/[...nextauth]/route'
 import Image from 'next/image'
 import React from 'react'
 import Links from './Links/Links'
-import { getSession } from "@/app/api/auth/[...nextauth]/route";
-
+import { redirect } from 'next/dist/server/api-utils'
+//import { getSession } from "@/app/api/auth/[...nextauth]/route";
 
 async function fetchSession() {
     try {
@@ -16,10 +20,15 @@ async function fetchSession() {
 }
 
 const Navbar = async () => {
+   //const { data: session, status } = useSession()
     // roles = bd, sh, tl, fr;
     const role = "bd";
-    const session = await fetchSession();
-    console.log(session);
+    // const session = await fetchSession();
+    // console.log(session);
+    const session= await getServerSession(authOptions);
+    // if(!session){
+    //     redirect('/login');
+    // }
 
     return (
         <div className="navbar h-16 w-full px-24 flex justify-between items-center bg-purple-900 text-white">
@@ -30,7 +39,8 @@ const Navbar = async () => {
             <div className="links">
                 <Links role={role} />
             </div>
-            <div className="username text-xl bg-white rounded-xl py-2 px-4 text-black">Username({role})</div>
+            <div className="username text-xl bg-white rounded-xl py-2 px-4 text-black">name:{session?.user?.username}</div>
+
         </div>
     )
 }

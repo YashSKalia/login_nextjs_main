@@ -1,8 +1,12 @@
 import  CredentialsProvider  from "next-auth/providers/credentials"
 import NextAuth from "next-auth/next"
-import { connectToDB } from "@/lib/connectToDB";
+import { connectToDB } from "../../../../lib/connectToDB";
 import bcrypt from "bcrypt";
-import models from "@/lib/models";
+import models from "../../../../lib/models";
+import type { GetServerSidePropsContext, NextApiRequest, NextApiResponse } from "next"
+import type { NextAuthOptions } from "next-auth"
+import { getServerSession } from "next-auth"
+import { useSession } from "next-auth/react";
 const User = models.User;
 
 async function login(credentials) {
@@ -72,17 +76,16 @@ export const authOptions = {
         }
     }
 };
-
-async function getSession() {
-  try {
-    const token = await NextAuth(authOptions);
-    const session = await NextAuth.getSession({ token });
-    return session;
-  } catch (err) {
-    console.error("Error getting session:", err);
-    throw new Error("Error getting session");
-  }
-}
+// async function getSession() {
+//   try {
+//     const token = await NextAuth(authOptions);
+//     const session = await NextAuth.getSession({ token });
+//     return session;
+//   } catch (err) {
+//     console.error("Error getting session:", err);
+//     throw new Error("Error getting session");
+//   }
+// }
 
 
 // export default NextAuth(authOptions)
@@ -90,5 +93,5 @@ const handler = NextAuth(authOptions);
 
 export { handler as GET, handler as POST};
 
-export { getSession };
+//export { getSession };
 // export { GET, POST } from "@/lib/auth"

@@ -1,5 +1,5 @@
-import { connectToDB } from "@/lib/connectToDB";
-import  models  from "@/lib/models";
+import { connectToDB } from "../../../lib/connectToDB";
+import  models  from "../../../lib/models"
 const User = models.User;
 import { NextResponse } from "next/server";
 import bcrypt from "bcrypt";

@@ -1,10 +1,10 @@
 
 import { Inter } from "next/font/google";
 import "./globals.css";
-import Navbar from "@/Components/Navbar/Navbar";
-import Footer from "@/Components/Footer/Footer";
-// import { SessionProvider } from "next-auth/react"
-
+import Navbar from "../Components/Navbar/Navbar";
+//import Footer from "@/Components/Footer/Footer";
+ import { SessionProvider } from "next-auth/react"
+import Provider from "../context/Provider"
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -16,12 +16,15 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
+      
     <body className="h-full w-full flex flex-col">
+    <Provider>
       <Navbar />
       {children}
-      {/* <Footer /> */}
       
+      </Provider>
     </body>
+    
     </html>
   );
 }

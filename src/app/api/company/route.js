@@ -1,6 +1,6 @@
-import models from "@/lib/models";
+import models from "../../../lib/models";
 const Company = models.Company;
-import { connectToDB } from "@/lib/connectToDB";
+import { connectToDB } from "../../../lib/connectToDB";
 import { NextResponse } from "next/server";
 
 // export async function POST(req) {
